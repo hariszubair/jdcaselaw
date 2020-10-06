@@ -24,3 +24,8 @@ Route::get('/category', [App\Http\Controllers\HomeController::class, 'category']
 Route::post('/add_category', [App\Http\Controllers\HomeController::class, 'add_category'])->name('add_category');
 Route::post('/edit_category', [App\Http\Controllers\HomeController::class, 'edit_category'])->name('edit_category');
 Route::delete('/delete_category/{id}', [App\Http\Controllers\HomeController::class, 'delete_category'])->name('delete_category');
+
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    $exitCode = Artisan::call('cache:clear');
+});
