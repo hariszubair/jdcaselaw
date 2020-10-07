@@ -32,7 +32,7 @@
 <script type="text/javascript">
    @include('sweet::alert')
 </script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function() {
 var parts = $(location).attr('href').split("/");
 var last_part = parts[parts.length-1];
@@ -41,20 +41,20 @@ var last_part = parts[parts.length-1];
     $('.nav-item a').each(function(){
         var $this = $(this);
         // if the current path is like this link, make it active
+        if(last_part=='' && $this.attr('href')== './'){
+            $this.addClass('active');
+        }
         if($this.attr('href')== last_part){
         // console.log($this.parent().parent().parent(first-child))
 
             $this.addClass('active');
             $this.parent().parent().parent().children()[0].classList.add('active')
+            $this.parent().parent().parent().addClass('menu-open')
         }
-        else{
-            $this.removeClass('active');
-            // $this.parent().parent().parent().children()[0].classList.remove('active')
-
-        }
+        
     })
 })
 })
-</script> -->
+</script>
 </body>
 </html>

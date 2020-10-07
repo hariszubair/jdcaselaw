@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Forum extends Model
 {
+    public $timestamps = false;
     use HasFactory;
+     protected $fillable =[
+     	'name'
+     ];
 }

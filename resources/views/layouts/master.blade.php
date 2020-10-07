@@ -1,7 +1,6 @@
 @include('layouts.header')
 @include('layouts.navbar')
-      @yield('sidebar')
-
+@include('layouts.sidebar')
       @yield('content')
 @include('layouts.footer')
 

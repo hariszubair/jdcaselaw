@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Category</h1>
+            <h1 class="m-0">Statute</h1>
           </div><!-- /.col -->
          
         </div><!-- /.row -->
@@ -32,7 +32,7 @@
 </button>
               </div>
               <div class="card-body">
-               <table id="category_table" class="table" width="100%" style="font-size: 12px">
+               <table id="statute_table" class="table" width="100%" style="font-size: 12px">
                     <thead>
                         <tr>
                           <th>#</th>
@@ -41,17 +41,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach($categories as $key=>$category)
+                      @foreach($statutes as $key=>$statute)
                         <tr>
                           <td>{{$key+1}}</td>
-                          <td>{{$category->name}}</td>
-                          <td><div style="display: flex;"><button type="button" class="btn btn-primary edit_category_button"   name="{{$category->name}}" cat_id="{{$category->id}}"><i class="fas fa-edit"></i></button>
+                          <td>{{$statute->name}}</td>
+                          <td><div style="display: flex;"><button type="button" class="btn btn-primary edit_statute_button"   name="{{$statute->name}}" cat_id="{{$statute->id}}"><i class="fas fa-edit"></i></button>
                             @if(Auth::user()->hasRole('Admin'))
-                            <form action="{{ url('/delete_category', ['id' => $category->id]) }}" method="post" name='delete_category_form{{$category->id}}' style="margin-bottom: 0">
+                            <form action="{{ url('/delete_statute', ['id' => $statute->id]) }}" method="post" name='delete_statute_form{{$statute->id}}' style="margin-bottom: 0">
                             
                             @csrf
                             @method('delete')
-                              <button style="margin-left: 5px" type="button" class="btn btn-danger delete_category_button" name="{{$category->id}}"><i class="fas fa-trash"></i></button></form>@endif</div></td>
+                              <button style="margin-left: 5px" type="button" class="btn btn-danger delete_statute_button" name="{{$statute->id}}"><i class="fas fa-trash"></i></button></form>@endif</div></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -68,13 +68,13 @@
     <!-- /.content -->
   </div>
   <!-- Modal -->
-        <form action="add_category" method="post">
+        <form action="add_statute" method="post">
           @csrf
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Statute</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -82,8 +82,8 @@
       <div class="modal-body">
           <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Category Name</label>
-                    <input type="text" class="form-control" name="category_name" placeholder="Please Add Category" required>
+                    <label for="exampleInputEmail1">Statute Name</label>
+                    <input type="text" class="form-control" name="statute_name" placeholder="Please Add Statute" required>
                   </div>
                  
                 </div>
@@ -100,13 +100,13 @@
 
 <!-- edit -->
 <!-- Modal -->
-        <form action="edit_category" method="post">
+        <form action="edit_statute" method="post">
           @csrf
-<div class="modal fade" id="editcategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editstatuteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Statute</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -114,9 +114,9 @@
       <div class="modal-body">
           <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Category Name</label>
-                    <input type="text" class="form-control" name="category_name" placeholder="Please Add Category" required id='edit_category_name'>
-                    <input style="display: none" type="number" class="form-control" name="id" required id='edit_category_id'>
+                    <label for="exampleInputEmail1">Statute Name</label>
+                    <input type="text" class="form-control" name="statute_name" placeholder="Please Add Statute" required id='edit_statute_name'>
+                    <input style="display: none" type="number" class="form-control" name="id" required id='edit_statute_id'>
                   </div>
                  
                 </div>
@@ -141,14 +141,14 @@
 
 <script type="text/javascript">
   $( document ).ready(function() {
-    $('#category_table').DataTable();
+    $('#statute_table').DataTable();
 });
-  $(".edit_category_button").click(function(){
-    $('#edit_category_name').val($(this).attr('name'));
-    $('#edit_category_id').val($(this).attr('cat_id'));
-    $('#editcategoryModal').modal('show')
+  $(".edit_statute_button").click(function(){
+    $('#edit_statute_name').val($(this).attr('name'));
+    $('#edit_statute_id').val($(this).attr('cat_id'));
+    $('#editstatuteModal').modal('show')
 });
-$(".delete_category_button").click(function(){
+$(".delete_statute_button").click(function(){
   var temp =$(this);
     swal({
       title: "Are you sure?",
@@ -158,7 +158,7 @@ $(".delete_category_button").click(function(){
       dangerMode: true,
     }).then(function(isConfirm) {
       if (isConfirm) {
-      $('form[name="delete_category_form'+temp.attr('name')+'"]').submit();      
+      $('form[name="delete_statute_form'+temp.attr('name')+'"]').submit();      
     }
       else{
       return false;
@@ -169,7 +169,7 @@ $(".delete_category_button").click(function(){
 $('#exampleModal').on('shown.bs.modal', function () {
     $('input:text:visible:first', this).focus();
 })
-$('#editcategoryModal').on('shown.bs.modal', function () {
+$('#editstatuteModal').on('shown.bs.modal', function () {
     $('input:text:visible:first', this).focus();
 })  
 </script>
